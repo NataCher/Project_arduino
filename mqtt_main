@@ -1,0 +1,128 @@
+#include <PubSubClient.h>
+#include "DHT.h" 
+#include <WiFi.h>
+
+#define DHTPIN D4 //Вывод к которому подключен датчик, в данном случае  пин D4
+#define DHTTYPE DHT21 // DHT 21 (AM2301) //Здесь выбираем какой у нас датчик.
+
+DHT dht(DHTPIN, DHTTYPE); 
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+const char*ssid = "??????????"; //  название беспроводной точки доступа Wi-Fi
+const char*password = "????????";
+const char*mqtt_server = "????????"; // IP адрес брокера
+
+void setup_wifi() // установление соединения с Wi-Fi,
+{
+  delay(10);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status()!= WL_CONNECTED) 
+
+{
+  delay(500);
+  Serial.print(".");
+}
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+}
+
+void callback(char* topic, byte* message, unsigned int lenght) // вызов ф при получении нового сообщения  по MQTT, вывод сообщения.
+{
+  Serial.print("Message arrived [");
+  Serial.print("topic");
+  Serial.print("]");
+
+  for (int i = 0; i < lenght; i++) 
+{
+  Serial.print((char)message[i]);
+}
+  Serial.println();
+}
+
+
+void reconnect() // соединение с брокером
+{
+    while (!client.connected()) 
+{
+    Serial.print("Attempting MQTT connection...");
+    if (client.connected("ESP8266Client")) 
+{
+    Serial.println("connected");
+} 
+    else 
+{
+
+    Serial.print("failed, rc=");
+    Serial.print(client.state());
+    Serial.println("try again in 5 second");
+    delay(5000);
+
+   }
+  }
+}
+
+void setup() {
+
+    Serial.begin(9600);
+    setup_wifi();
+    client.setServer(mqtt_server, 1883);
+    client.setCallback(callback);
+    dht.begin();
+}
+
+
+void loop() {
+
+    if (!client.connected())
+{
+    reconnect();
+}
+    client.loop();      
+    delay(2000); // Задержка перед опросом датчика. Минимум 2000(2 секунды)
+    float h = dht.readHumidity(); //читаем влажность
+    float t = dht.readTemperature(); // читаем температуру 
+ 
+        if (isnan(h) || isnan(t)) 
+            {
+            Serial.println("Не удалось прочитать с датчика DHT!"); //Проверка подключен ли датчик
+            return;
+            }
+
+    Serial.print("Temperature: ");
+    Serial.println(temperature);
+
+    if(temperature > 25){
+    digitalWrite(D1,HIGH); //высокий уровень сигнала
+ } 
+      else 
+ {
+    digitalWrite(D1,LOW); // низкий уровень сигнала 
+}
+
+    char message[50];
+    sprintf(message, "%.2f", temperature);
+    client.publish("home/temperature", message); // отправка на сервер
+}
+    // float hic = dht.computeHeatIndex(t, h, false);// Вычислить индекс тепла в Цельсиях (isFahreheit = false)
+
+    // Serial.print("Humidity: "); // печатаем полученные данные.
+    //Serial.print(h);
+    //Serial.print(" %\t");
+    //Serial.print("Temperature: ");
+    //Serial.print(t);
+    //Serial.println(" *C \t");
+    //Serial.print("Heat index: ");
+    //Serial.print(hic);
+    //Serial.println(" *C ");
+ 
+ 
