@@ -1,0 +1,13 @@
+mqtt: 
+broker: MQTT_Broker_IP_????????????
+port: 1883 //Стандартный порт MQTT-брокера для входящих TCP-соединений — 1883, при использовании защищенного SSL-подключения используется порт 8883.
+client_id: home-assistant-1
+username: your_MQTT_username_????? (если нужно)
+password: your_MQTT_password_????? (если нужно)
+
+
+sensor:
+- platform: mqtt
+state_topic: "home/temperature"
+name: "Temperature"
+unit_of_measuremen: "C"
