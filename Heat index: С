@@ -1,0 +1,56 @@
+#include "DHT.h" //Подключаем библиотеку.
+#define DHTPIN D5 //Вывод к которому подключен датчик, в данном случае  пин D5
+#define DHTTYPE DHT11 
+DHT dht(DHTPIN, DHTTYPE); 
+
+void setup() 
+  {
+   Serial.begin(9600); 
+   Serial.println("Тест пройден");
+   dht.begin(); 
+  }
+
+void loop() 
+  {
+    delay(2000); // Задержка перед опросом датчика. Минимум 2000(2 секунды)
+    float h = dht.readHumidity(); //читаем влажность
+    float t = dht.readTemperature(); // читаем температуру 
+ 
+        if (isnan(h) || isnan(t)) 
+            {
+            Serial.println("Не удалось прочитать с датчика DHT!"); //Проверка подключен ли датчик
+            return;
+            }
+
+     float hic = dht.computeHeatIndex(t, h, false);// Вычислить индекс тепла в Цельсиях (isFahreheit = false)
+
+    Serial.print("Humidity: "); // печатаем полученные данные.
+    Serial.print(h);
+    Serial.print(" %\t");
+    
+    Serial.print("Temperature: ");
+    Serial.print(t);
+    Serial.print(" *C \t");
+    
+    Serial.print("Heat index: ");
+    Serial.print(hic);
+    Serial.println(" *C ");
+ }
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
