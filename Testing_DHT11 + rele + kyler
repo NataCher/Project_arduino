@@ -1,33 +1,42 @@
-#include <Adafruit_Sensor.h>
-
 #include "DHT.h" //Подключаем библиотеку.
 #define DHTPIN D5 //Вывод к которому подключен датчик, в данном случае  пин D5
 #define DHTTYPE DHT11 
 
 DHT dht(DHTPIN, DHTTYPE); 
 
-int relayPin = D6; 
-int coolerPin = D6;
-float tempThreshold = 25.0;
+  int relayPin = D6; 
+  int coolerPin = D6;
+  float tempThreshold = 25.0;
 
-void setup() {
-pinMode(relayPin, OUTPUT);
-pinMode(coolerPin, OUTPUT);
-dht.begin(); 
+void setup() 
+{
+  pinMode(relayPin, OUTPUT);
+  pinMode(coolerPin, OUTPUT);
+  dht.begin(); 
 }
 
-void loop() {
+void loop()
+{
+  delay(2000);
+  float temperature = dht.readTemperature();
+  if(temperature>=tempThreshold) 
+{
+  digitalWrite(coolerPin, HIGH);
+}
+  else 
+{
+   digitalWrite(relayPin, LOW);
+   digitalWrite(coolerPin,LOW);
+  }
+}
 
-delay(2000);
-float temperature = dht.readTemperature();
-if(temperature>=tempThreshold) {
-digitalWrite(coolerPin, HIGH);
-}
-else {
-digitalWrite(relayPin, LOW);
-digitalWrite(coolerPin,LOW);
-}
-}
+
+
+
+
+
+
+
 
 
 
