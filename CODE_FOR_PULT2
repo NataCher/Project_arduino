@@ -138,6 +138,7 @@ remote_receiver:
 
 
                                                                                                       Модифицированный вариант кода для пульта:
+											     Должно начинаться с положительного числа и заканчиваться
   - platform: nodemcuv2
     name: ON_OFF 
     turn_on_action:
