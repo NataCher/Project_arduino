@@ -1,8 +1,8 @@
 esphome:
-  name: climate-th
+  name: dht11-test
 
-esp8266:
-  board: nodemcuv2
+platform: esp8266
+board: d1_mini
 
 # Enable logging
 logger:
@@ -11,7 +11,7 @@ logger:
 api:
 
 ota:
-  password: "741aeee215cdb4aeaac409ceebdf7a85"
+  password: "8395495d84b9be037f8315adfbfe2f7d"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -19,7 +19,18 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Climate-Th Fallback Hotspot"
-    password: "euIZcyo0g8nN"
+    ssid: "Dht11-Test Fallback Hotspot"
+    password: "UywpybSZ9A8v"
 
 captive_portal:
+
+sensor:
+  - platform: dht
+  pin: D5
+  model: DHT11
+  temperature: 
+   name: "Climate-Th Temperature"
+  humidity:
+   name: "Climate-Th Humidity"
+  update_interval: 60s
+  
