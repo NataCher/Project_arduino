@@ -1,0 +1,197 @@
+esphome:
+  name: dht11-test
+
+platform: esp8266
+board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "8395495d84b9be037f8315adfbfe2f7d"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Dht11-Test Fallback Hotspot"
+    password: "UywpybSZ9A8v"
+
+captive_portal:
+
+sensor:
+  - platform: dht
+  pin: D5
+  model: DHT11
+  temperature: 
+   name: "Climate-Th Temperature"
+  humidity:
+   name: "Climate-Th Humidity"
+  update_interval: 60s
+  
+  
+====================================================================================================================================================
+====================================================================================================================================================
+
+esphome:
+  name: dht11-test
+  platform: ESP8266
+  board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "8395495d84b9be037f8315adfbfe2f7d"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Dht11-Test Fallback Hotspot"
+    password: "UywpybSZ9A8v"
+
+captive_portal:
+
+sensor:
+  - platform: dht
+    pin: D5
+    model: DHT11
+    temperature:
+      name: "Climate-Th Temperature"
+    humidity:
+      name: "Climate-Th Humidity"
+    update_interval: 60s
+    
+    =====================================================================================================================================================
+    =====================================================================================================================================================
+    
+    
+    INFO Reading configuration /config/esphome/dht11-test.yaml...
+INFO Generating C++ source...
+INFO Compiling app...
+Processing dht11-test (board: d1_mini; framework: arduino; platform: platformio/espressif8266 @ 3.2.0)
+--------------------------------------------------------------------------------
+HARDWARE: ESP8266 80MHz, 80KB RAM, 4MB Flash
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+Dependency Graph
+|-- <ESPAsyncTCP-esphome> 1.2.3
+|-- <ESPAsyncWebServer-esphome> 2.1.0
+|   |-- <ESPAsyncTCP-esphome> 1.2.3
+|   |-- <Hash> 1.0
+|   |-- <ESP8266WiFi> 1.0
+|-- <DNSServer> 1.1.1
+|-- <ESP8266WiFi> 1.0
+|-- <ESP8266mDNS> 1.2
+RAM:   [====      ]  39.9% (used 32692 bytes from 81920 bytes)
+Flash: [====      ]  39.0% (used 407761 bytes from 1044464 bytes)
+========================= [SUCCESS] Took 1.24 seconds =========================
+INFO Successfully compiled program.
+INFO Resolving IP address of dht11-test.local
+INFO  -> 10.43.6.22
+INFO Uploading /data/dht11-test/.pioenvs/dht11-test/firmware.bin (411920 bytes)
+INFO Compressed to 286878 bytes
+Uploading: [============================================================] 100% Done...
+
+INFO Waiting for result...
+INFO OTA successful
+INFO Successfully uploaded program.
+INFO Starting log output from dht11-test.local using esphome API
+INFO Successfully connected to dht11-test.local
+[10:09:03][I][app:102]: ESPHome version 2022.2.5 compiled on May 25 2023, 10:03:38
+[10:09:03][C][wifi:491]: WiFi:
+[10:09:03][C][wifi:353]:   Local MAC: C8:C9:A3:5A:9A:EF
+[10:09:03][C][wifi:354]:   SSID: [redacted]
+[10:09:03][C][wifi:355]:   IP Address: 10.43.6.22
+[10:09:03][C][wifi:356]:   BSSID: [redacted]
+[10:09:03][C][wifi:358]:   Hostname: 'dht11-test'
+[10:09:03][C][wifi:360]:   Signal strength: -65 dB ▂▄▆█
+[10:09:03][C][wifi:364]:   Channel: 7
+[10:09:03][C][wifi:365]:   Subnet: 255.255.255.0
+[10:09:03][C][wifi:366]:   Gateway: 10.43.6.254
+[10:09:03][C][wifi:367]:   DNS1: 10.43.0.1
+[10:09:03][C][wifi:368]:   DNS2: 10.43.26.1
+[10:09:03][C][logger:233]: Logger:
+[10:09:03][C][logger:234]:   Level: DEBUG
+[10:09:03][C][logger:235]:   Log Baud Rate: 115200
+[10:09:03][C][logger:236]:   Hardware UART: UART0
+[10:09:03][C][dht:017]: DHT:
+[10:09:03][C][dht:018]:   Pin: GPIO14
+[10:09:03][C][dht:022]:   Model: DHT11
+[10:09:03][C][dht:027]:   Update Interval: 60.0s
+[10:09:03][C][dht:029]:   Temperature 'Climate-Th Temperature'
+[10:09:03][C][dht:029]:     Device Class: 'temperature'
+[10:09:03][C][dht:029]:     State Class: 'measurement'
+[10:09:03][C][dht:029]:     Unit of Measurement: '°C'
+[10:09:03][C][dht:029]:     Accuracy Decimals: 1
+[10:09:03][C][dht:030]:   Humidity 'Climate-Th Humidity'
+[10:09:03][C][dht:030]:     Device Class: 'humidity'
+[10:09:03][C][dht:030]:     State Class: 'measurement'
+[10:09:03][C][dht:030]:     Unit of Measurement: '%'
+[10:09:03][C][dht:030]:     Accuracy Decimals: 0
+[10:09:03][C][captive_portal:144]: Captive Portal:
+[10:09:04][C][mdns:084]: mDNS:
+[10:09:04][C][mdns:085]:   Hostname: dht11-test
+[10:09:04][C][ota:085]: Over-The-Air Updates:
+[10:09:04][C][ota:086]:   Address: dht11-test.local:8266
+[10:09:04][C][ota:089]:   Using Password.
+[10:09:04][C][api:138]: API Server:
+[10:09:04][C][api:139]:   Address: dht11-test.local:6053
+[10:09:04][C][api:143]:   Using noise encryption: NO
+[10:09:10][D][api:102]: Accepted 10.43.6.33
+[10:09:10][D][api.connection:826]: ESPHome Logs 2022.2.5 (10.43.6.33): Connected successfully
+[10:09:10][I][app:102]: ESPHome version 2022.2.5 compiled on May 25 2023, 10:03:38
+[10:09:10][C][wifi:491]: WiFi:
+[10:09:10][C][wifi:353]:   Local MAC: C8:C9:A3:5A:9A:EF
+[10:09:10][C][wifi:354]:   SSID: [redacted]
+[10:09:10][C][wifi:355]:   IP Address: 10.43.6.22
+[10:09:10][C][wifi:356]:   BSSID: [redacted]
+[10:09:10][C][wifi:358]:   Hostname: 'dht11-test'
+[10:09:10][C][wifi:360]:   Signal strength: -70 dB ▂▄▆█
+[10:09:10][C][wifi:364]:   Channel: 7
+[10:09:10][C][wifi:365]:   Subnet: 255.255.255.0
+[10:09:10][C][wifi:366]:   Gateway: 10.43.6.254
+[10:09:10][C][wifi:367]:   DNS1: 10.43.0.1
+[10:09:10][C][wifi:368]:   DNS2: 10.43.26.1
+[10:09:10][C][logger:233]: Logger:
+[10:09:10][C][logger:234]:   Level: DEBUG
+[10:09:10][C][logger:235]:   Log Baud Rate: 115200
+[10:09:10][C][logger:236]:   Hardware UART: UART0
+[10:09:10][C][dht:017]: DHT:
+[10:09:10][C][dht:018]:   Pin: GPIO14
+[10:09:10][C][dht:022]:   Model: DHT11
+[10:09:10][C][dht:027]:   Update Interval: 60.0s
+[10:09:10][C][dht:029]:   Temperature 'Climate-Th Temperature'
+[10:09:10][C][dht:029]:     Device Class: 'temperature'
+[10:09:10][C][dht:029]:     State Class: 'measurement'
+[10:09:10][C][dht:029]:     Unit of Measurement: '°C'
+[10:09:10][C][dht:029]:     Accuracy Decimals: 1
+[10:09:10][C][dht:030]:   Humidity 'Climate-Th Humidity'
+[10:09:10][C][dht:030]:     Device Class: 'humidity'
+[10:09:10][C][dht:030]:     State Class: 'measurement'
+[10:09:10][C][dht:030]:     Unit of Measurement: '%'
+[10:09:10][C][dht:030]:     Accuracy Decimals: 0
+[10:09:10][C][captive_portal:144]: Captive Portal:
+[10:09:10][C][mdns:084]: mDNS:
+[10:09:10][C][mdns:085]:   Hostname: dht11-test
+[10:09:10][C][ota:085]: Over-The-Air Updates:
+[10:09:10][C][ota:086]:   Address: dht11-test.local:8266
+[10:09:10][C][ota:089]:   Using Password.
+[10:09:10][C][api:138]: API Server:
+[10:09:10][C][api:139]:   Address: dht11-test.local:6053
+[10:09:10][C][api:143]:   Using noise encryption: NO
+[10:09:28][D][dht:048]: Got Temperature=30.2°C Humidity=31.0%
+[10:09:28][D][sensor:124]: 'Climate-Th Temperature': Sending state 30.20000 °C with 1 decimals of accuracy
+[10:09:28][D][sensor:124]: 'Climate-Th Humidity': Sending state 31.00000 % with 0 decimals of accuracy
+    
+
