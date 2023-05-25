@@ -433,6 +433,65 @@ INFO Successfully connected to receiver-tp.local
 [14:22:05][C][api:143]:   Using noise encryption: NO
 
 
+===========================================================================================================================================
+===========================================================================================================================================
+25.05.2023
+
+esphome:
+  name: receiver-tp
+
+esp8266:
+  board: nodemcuv2
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "c0893dcc72763574175d0c0518baf7d5"
+
+wifi:
+  ssid: kr
+  password: Kirovenergo6900
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Receiver Fallback Hotspot"
+    password: "TphV3LtDuqcx"
+
+captive_portal:
+#----------------------------------------------------------------------------
+remote_transmitter:
+  pin: D5
+  carrier_duty_percent: 50% 
+  id: Pr
+switch:
+  
+  - platform: template
+    name: ON_climate
+    turn_on_action:
+      - remote_transmitter.transmit_raw:
+          code: [4633, -2513, 361, -352, 392, -926, 366, -926, 366, -373, 360, -932, 360, -379, 366, -346, 387, -352, 362, -376, 357, -934, 358, -381, 364, -349, 384, -933, 359, -354, 390, -348, 366, -373, 360, -352, 382, -935, 367, -346, 388, -350, 363, 
+                -376, 358, -933, 359, -380, 364, -348, 386, -353, 360, -931, 382, -935, 367, -346, 388, -930, 362, -351, 383, -356, 357, -381, 364, -348, 385, -354, 359, -379, 365, -347, 387, -930, 362, -351, 382, -935, 368, -346, 388, -929, 362, -350, 384, -355, 358, 
+                -381, 364, -927, 364, -375, 359, -932, 360, -379, 365, -926, 366, -926, 387, -352, 361, -378, 366, -346, 388, -930, 362, -350, 383, -356, 358, -380, 364, -348, 386, -353, 360, -931, 392, -926, 366, -347, 386, -931, 361, -931, 361]
+          carrier_frequency: 38kHz   
+      - delay: 10 ms
+      - remote_transmitter.transmit_raw:
+          code: [4737]
+          carrier_frequency: 38kHz    
+          
+remote_receiver:
+  pin: 
+    number: D7
+    inverted: True
+    mode: INPUT_PULLUP
+  dump: raw             
+          
+
+
+
 
 
 
