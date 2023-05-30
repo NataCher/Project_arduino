@@ -17,3 +17,24 @@ automation:
     service: switch.turn_off
     entity_id: switch.relay_tp 
     
+
+
+
+automation:
+  -alias: "Включение реле, при определенном времени 15:00" 
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.climate_th_temperature
+    below: -9
+  action:
+    service: switch.turn_on
+    entity_id: switch.relay_tp
+
+  -alias: "Выключение реле, при определенном времени 17:00" 
+  trigger:
+    platform: numeric_state
+    entify_id: sensor.climate_th_temperature
+    below: 15 
+  action:
+    service: switch.turn_off
+    entity_id: switch.relay_tp
