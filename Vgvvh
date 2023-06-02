@@ -1,0 +1,31 @@
+- id: '1685434882489'
+  alias: Rele_test_on
+  description: Включение реле в 15:00
+  trigger:
+  - platform: time
+    at: '15:00'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.relay_tp
+  - service: notify.mail_notification
+    data:
+      message: "Реле включено"
+      title: "Уведомление от Home Assistant"
+      target:
+      - "ntvalat@gmail.com"
+
+- id: '1685435026809'
+  alias: Rele_test_off
+  description: Выключение реле в 17:00
+  trigger:
+  - platform: time
+    at: '17:00'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.relay_tp
+  - service: notify.mail_notification
+    data:
+      message: "Реле выключено"
+      title: "Уведомление от Home Assistant"
+      target:
+      - "ntvalat@gmail.com"
