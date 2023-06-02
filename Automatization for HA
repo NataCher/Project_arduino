@@ -122,10 +122,17 @@ notify:
     recipient:
     - ntvajlat@gmail.com
     
-     
- #-----------------------------
- # Включение реле и лампы
- #-----------------------------
+# Оповещение на почту при включении реле - удалить со временем
+notify:
+  - name: mail_notification
+    platform: gmail
+    sender: ntvajlat@gmail.com
+    recipient:
+      - ntvajlat@gmail.com 
+
+#-----------------------------
+# Включение реле и лампы
+#-----------------------------
  
 - id: '1685434882489'
   alias: Rele_test_on
@@ -135,21 +142,21 @@ notify:
     at: '15:00'
   condition: []
   action:
-     - type: turn_on
-     - service: notify.mail_notification
-  data:
-    message: "Реле включено"
-    title: "Уведомление от Home Assistant"
-    target:
-       - "ntvalat@gmail.com"   
-    device_id: e956a97afafbae58e0176b7e14978930
-    entity_id: switch.relay_tp
-    domain: switch
+    - type: turn_on
+      service: notify.mail_notification
+      data:
+        message: "Реле включено"
+        title: "Уведомление от Home Assistant"
+        target:
+          - "ntvalat@gmail.com"   
+        device_id: e956a97afafbae58e0176b7e14978930
+        entity_id: switch.relay_tp
+        domain: switch
   mode: single
   
- #-----------------------------
- # Выключение реле и лампы
- #-----------------------------
+#-----------------------------
+# Выключение реле и лампы
+#-----------------------------
   
 - id: '1685435026809'
   alias: Rele_test_off
@@ -160,27 +167,13 @@ notify:
   condition: []
   action:
   - type: turn_off
-  - service: notify.mail_notification
-  data:
-    message: "Реле выключено"
-    title: "Уведомление от Home Assistant"
-    target:
-       - "ntvalat@gmail.com"
-    device_id: e956a97afafbae58e0176b7e14978930
-    entity_id: switch.relay_tp
-    domain: switch
+    service: notify.mail_notification
+    data:
+      message: "Реле выключено"
+      title: "Уведомление от Home Assistant"
+      target:
+        - "ntvalat@gmail.com"
+      device_id: e956a97afafbae58e0176b7e14978930
+      entity_id: switch.relay_tp
+      domain: switch
   mode: single
-
-#Оповещение на почту при включении реле - удалить со временем
-notify:
-    - name: mail_notification
-    platform: gmail
-    sender: ntvajlat@gmail.com
-    recipient:
-    - ntvajlat@gmail.com 
-
-
-end of the stream or a document separator is expected at line 79, column 1:
-    notify:
-    ^
-
