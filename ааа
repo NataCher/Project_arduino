@@ -1,31 +1,6 @@
-- id: '1644496332411'
-  alias: Rassvet
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunrise
-    offset: '0'
-  condition: []
-  action:
-  - service: telegram_bot.send_message
-    data:
-      message: Rassvet. Доброе утро.
-  mode: single
-- id: '1644496644579'
-  alias: Zakat
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: '0'
-  condition: []
-  action:
-  - service: telegram_bot.send_message
-    data:
-      message: Zakat. Закат.
-  mode: single
-  
+#-----------------------------
 # Оповещение на почту при включении реле - удалить со временем
+#-----------------------------
 notify:
   - name: mail_notification
     platform: gmail
@@ -80,8 +55,3 @@ notify:
       entity_id: switch.relay_tp
       domain: switch
   mode: single
-  
-  
-  end of the stream or a document separator is expected at line 29, column 1:
-    notify:
-    ^
