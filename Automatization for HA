@@ -79,7 +79,7 @@ _____________________________________________________________
                   Код с уведомлением на почту 
 _____________________________________________________________
 automation:
-  -alias: "Уведомление о в ыключении реле"
+  -alias: "Уведомление о выключении реле"
   trigger:
     platform: state
     entity_id: switch.relay_tp
@@ -114,7 +114,7 @@ automation:
         
         
         
-        #Оповещение на почту при включении реле - удалить со временем
+    #Оповещение на почту при включении реле - удалить со временем
 notify:
     - name: mail_notification
     platform: gmail
@@ -122,11 +122,60 @@ notify:
     recipient:
     - ntvajlat@gmail.com
     
-    
-    duplicated mapping key at line 75, column -37:
-    notify:
-    ^
-        
      
+ #-----------------------------
+ # Включение реле и лампы
+ #-----------------------------
+ 
+- id: '1685434882489'
+  alias: Rele_test_on
+  description: Включение реле в 15:00
+  trigger:
+  - platform: time
+    at: '15:00'
+  condition: []
+  action:
+     - type: turn_on
+     - service: notify.mail_notification
+  data:
+    message: "Реле включено"
+    title: "Уведомление от Home Assistant"
+    target:
+       - "ntvalat@gmail.com"   
+    device_id: e956a97afafbae58e0176b7e14978930
+    entity_id: switch.relay_tp
+    domain: switch
+  mode: single
+  
+ #-----------------------------
+ # Выключение реле и лампы
+ #-----------------------------
+  
+- id: '1685435026809'
+  alias: Rele_test_off
+  description: Выключение реле в 17:00
+  trigger:
+  - platform: time
+    at: '17:00'
+  condition: []
+  action:
+  - type: turn_off
+  - service: notify.mail_notification
+  data:
+    message: "Реле выключено"
+    title: "Уведомление от Home Assistant"
+    target:
+       - "ntvalat@gmail.com"
+    device_id: e956a97afafbae58e0176b7e14978930
+    entity_id: switch.relay_tp
+    domain: switch
+  mode: single
 
+#Оповещение на почту при включении реле - удалить со временем
+notify:
+    - name: mail_notification
+    platform: gmail
+    sender: ntvajlat@gmail.com
+    recipient:
+    - ntvajlat@gmail.com 
 
