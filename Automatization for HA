@@ -37,3 +37,96 @@ automation:
   action:
     service: switch.turn_off
     entity_id: switch.relay_tp
+    
+_____________________________________________________________
+Оригинальный код с файла /config/automations.yaml
+_____________________________________________________________
+   
+ - id: '1685434882489'
+  alias: Rele_test_on
+  description: Включение реле в 15:00
+  trigger:
+  - platform: time
+    at: '15:00'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: e956a97afafbae58e0176b7e14978930
+    entity_id: switch.relay_tp
+    domain: switch
+  mode: single
+- id: '1685435026809'
+  alias: Rele_test_off
+  description: ''
+  trigger:
+  - platform: time
+    at: '18:00'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: e956a97afafbae58e0176b7e14978930
+    entity_id: switch.relay_tp
+    domain: switch
+  mode: single
+   
+    
+    
+    
+    
+    
+    
+_____________________________________________________________
+                  Код с уведомлением на почту 
+_____________________________________________________________
+automation:
+  -alias: "Уведомление о в ыключении реле"
+  trigger:
+    platform: state
+    entity_id: switch.relay_tp
+    to: 'on'
+   action:
+    -service: notify.mail_notification
+      data:
+        message: "Реле включено"
+      title: "Уведомление от Home Assistant"
+      target:
+        - "ваш_адрес_электронной_почты"
+        
+    - alias: "Уведомление о выключении реле"
+    trigger:
+      platform: state
+      entity_id: switch.relay_tp
+      to: 'off'
+     action:
+        - service: notify.mail_notification
+        data:
+        message:"Реле выключено."
+        title: "Уведомление от Home Assistant"
+        target:
+          -"ваш_адрес_электронной_почты"
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        #Оповещение на почту при включении реле - удалить со временем
+notify:
+    - name: mail_notification
+    platform: gmail
+    sender: ntvajlat@gmail.com
+    recipient:
+    - ntvajlat@gmail.com
+    
+    
+    duplicated mapping key at line 75, column -37:
+    notify:
+    ^
+        
+     
+
+
