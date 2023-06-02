@@ -82,3 +82,91 @@
   mode: single
 
 
+
+====================================================
+
+
+
+      # Оповещение на почту при включении реле - удалить со временем
+  notify:
+    - name: mail_notification
+      platform: gmail
+      sender: ntvajlat@gmail.com
+      recipient:
+        - ntvajlat@gmail.com
+        
+        
+        
+        
+        - id: '1685434882489'
+  alias: Rele_test_on
+  description: Включение реле в 15:00
+  trigger:
+  - platform: time
+    at: '15:00'
+  condition: []
+  action:
+    - type: turn_on
+      service: notify.mail_notification
+      data:
+        message: "Реле включено"
+        title: "Уведомление от Home Assistant"
+        target:
+          - "ntvalat@gmail.com"   
+        device_id: e956a97afafbae58e0176b7e14978930
+        entity_id: switch.relay_tp
+        domain: switch
+  mode: single
+        
+  
+ #-----------------------------
+ # Включение реле и лампы
+ #-----------------------------
+ 
+- id: '1685434882489'
+  alias: Rele_test_on
+  description: Включение реле в 15:00
+  trigger:
+  - platform: time
+    at: '15:00'
+  condition: []
+  action:
+     - type: turn_on
+     - service: notify.mail_notification
+     device_id: e956a97afafbae58e0176b7e14978930
+     entity_id: switch.relay_tp
+     domain: switch
+  data:
+    message: "Реле включено"
+    title: "Уведомление от Home Assistant"
+    target:
+       - "ntvalat@gmail.com"   
+  mode: single
+  
+ #-----------------------------
+ # Выключение реле и лампы
+ #-----------------------------
+  
+- id: '1685435026809'
+  alias: Rele_test_off
+  description: Выключение реле в 17:00
+  trigger:
+  - platform: time
+    at: '17:00'
+  condition: []
+  action:
+  - type: turn_off
+  - service: notify.mail_notification
+   device_id: e956a97afafbae58e0176b7e14978930
+   entity_id: switch.relay_tp
+   domain: switch
+  data:
+    message: "Реле выключено"
+    title: "Уведомление от Home Assistant"
+    target:
+       - "ntvalat@gmail.com"
+
+  mode: single
+  
+  Message malformed: extra keys not allowed @ data['action'][0]['type']
+
