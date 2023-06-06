@@ -253,3 +253,97 @@ notify:
   mode: single
 
 
+
+
+
+_______________________________________________________________________
+
+_______________________________________________________________________
+
+/config/configuration.yaml
+    
+  notify:
+  - name: mail_notification
+    platform: smtp 
+    server: smtp.gmail.com 
+    port: 587
+    timeout: 15 
+    sender: natash.cherwyack@gmail.com
+    encryption: starttls
+    username: natash.cherwyack@gmail.com
+    password: fxfinlewxproddoe
+    recipient:
+       - natash.cherwyack@gmail.com
+  sender_name: My Home Assistant    
+  
+  
+/config/automations.yaml
+
+  - id: '1644496332411'
+  alias: Rassvet
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: '0'
+  condition: []
+  action:
+  - service: telegram_bot.send_message
+    data:
+      message: Rassvet. Доброе утро.
+  mode: single
+- id: '1644496644579'
+  alias: Zakat
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '0'
+  condition: []
+  action:
+  - service: telegram_bot.send_message
+    data:
+      message: Zakat. Закат.
+  mode: single
+- id: '1685434882489'
+  alias: Rele_test_on
+  description: Включение реле в 15:00
+  trigger:
+  - platform: time
+    at: '11:27'
+  condition: []
+  action:
+  - service: switch.turn_on
+    entity_id: switch.relay_tp
+  - service: notify.mail_notification
+    data:
+      message: Реле включено
+      title: Уведомление от Home Assistant
+      target:
+      - natash.cherwyack@gmail.com
+  mode: single
+- id: '1685435026809'
+  alias: Rele_test_off
+  description: Выключение реле в 17:00
+  trigger:
+  - platform: time
+    at: '11:29'
+  condition: []
+  action:
+  - service: switch.turn_off
+    entity_id: switch.relay_tp
+  - service: notify.mail_notification
+    data:
+      message: Реле выключено
+      title: Уведомление от Home Assistant
+      target:
+      - natash.cherwyack@gmail.com
+  mode: single
+
+
+
+    
+    
+
+
+
