@@ -192,6 +192,8 @@ _____________________________________________________________
     encryption: starttls
     username: natash.cherwyack@gmail.com
     password: nagashino
+    recipient:
+       - natash.cherwyack@gmail.com
  sender_name: My Home Assistant     
  
  
